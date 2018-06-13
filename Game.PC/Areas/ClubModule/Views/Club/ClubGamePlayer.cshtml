@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "ClubGamePlayer";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle">
+            <div class="ll-layout-body" id="girdtable" luoluo-authorize="not" style="margin-top:-9%;height:111%;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var selectedRow;
+    var refreshGirdData;
+    var roomNum = request('roomNum');
+    var clubid = request('clubid')
+
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+        var page = {
+            init: function () {
+                page.initGird();
+                page.bind();
+                page.search();
+            },
+            bind: function () {
+                // 刷新
+                $('#ll_refresh').on('click', function () {
+                    location.reload();
+                });
+            },
+            initGird: function () {
+                $('#girdtable').llAuthorizeJfGrid({
+                    url: top.$.rootUrl + '/ClubModule/Club/GetClubGamePlayer?clubid=' + clubid + '&roomNum=' + roomNum,
+                    headData: [
+                            { label: '玩家', name: 'nickName', width: 150, align: 'center' },
+                            { label: '累计买入', name: 'buyScore', width: 100, align: 'center' },
+                            { label: '输赢结果', name: 'result', width: 100, align: 'center' },
+                            { label: '时间', name: 'updateTime', width: 150, align: 'center' }
+                    ],
+                    isPage: true,
+                    reloadSelected: false,
+                    mainId: 'id'
+                });
+            },
+            search: function (param) {
+                param = param || {};
+                $('#girdtable').jfGridSet('reload', { param: param });
+            },
+        };
+
+        page.init();
+    }
+</script>

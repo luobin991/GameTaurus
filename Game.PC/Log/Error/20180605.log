@@ -1,0 +1,50 @@
+﻿2018-06-05 16:50:43
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 10001022222 不是 Int32 的有效值。
+
+2018-06-05 16:50:43
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 10001022222 不是 Int32 的有效值。
+
+2018-06-05 16:50:56
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 10001022222 不是 Int32 的有效值。
+
+2018-06-05 16:50:56
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 10001022222 不是 Int32 的有效值。
+
+2018-06-05 16:51:49
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 33333333333 不是 Int32 的有效值。
+
+2018-06-05 16:51:49
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 33333333333 不是 Int32 的有效值。
+
+2018-06-05 16:52:38
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 10001022222 不是 Int32 的有效值。
+
+2018-06-05 16:52:38
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 10001022222 不是 Int32 的有效值。
+
+2018-06-05 16:52:45
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 10001022222 不是 Int32 的有效值。
+
+2018-06-05 16:52:45
+Url：/GameConfig/SectionConfig/UpdateSection
+Message：JSONHelper.JSONToObject(): 10001022222 不是 Int32 的有效值。
+
+2018-06-05 16:56:21
+Url：/ClubModule/Club/SetuUserDiamondLimit
+Message：对于“Game.PC.Areas.ClubModule.Controllers.ClubController”中方法“System.Web.Mvc.ActionResult SetuUserDiamondLimit(Int32, Int32, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“value”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+
+2018-06-05 16:56:21
+Url：/ClubModule/Club/SetuUserDiamondLimit
+Message：对于“Game.PC.Areas.ClubModule.Controllers.ClubController”中方法“System.Web.Mvc.ActionResult SetuUserDiamondLimit(Int32, Int32, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“value”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+

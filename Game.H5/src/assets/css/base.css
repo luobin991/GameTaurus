@@ -1,0 +1,495 @@
+/* 移动端定义字体的代码 */
+
+html {
+    font-size: 10px
+}
+
+@media screen and (min-width:321px) and (max-width:375px) {
+    html {
+        font-size: 11px
+    }
+}
+
+@media screen and (min-width:376px) and (max-width:414px) {
+    html {
+        font-size: 12px
+    }
+}
+
+@media screen and (min-width:415px) and (max-width:639px) {
+    html {
+        font-size: 15px
+    }
+}
+
+@media screen and (min-width:640px) and (max-width:719px) {
+    html {
+        font-size: 20px
+    }
+}
+
+@media screen and (min-width:720px) and (max-width:749px) {
+    html {
+        font-size: 22.5px
+    }
+}
+
+@media screen and (min-width:750px) and (max-width:799px) {
+    html {
+        font-size: 23.5px
+    }
+}
+
+@media screen and (min-width:800px) {
+    html {
+        font-size: 25px
+    }
+}
+
+body {
+    font-family: "微软雅黑", helvetica !important;
+    -webkit-text-size-adjust: 100% !important;
+}
+
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    /*清除点击默认的高亮效果*/
+    -webkit-box-sizing: border-box;
+    /*以你的border开始计算你的宽度*/
+}
+
+body {
+    font-family: "Microsoft YaHei", sans-serif;
+    /*第二个是手机的一个默认的字体*/
+    color: #000;
+    background: #eee;
+}
+
+a {
+    text-decoration: none;
+    color: #441900;
+}
+
+ul {
+    list-style: none;
+}
+
+a,
+button,
+select,
+input,
+textarea {
+    border: none;
+    resize: none;
+    outline: none;
+    /*清除选中效果*/
+    -webkit-appearance: none;
+    /*清楚浏览器默认的样式*/
+}
+
+.btn:focus {
+    outline: thin dotted transparent;
+    outline: 5px auto transparent;
+    outline-offset: 0px;
+    outline: none;
+    border: none;
+}
+
+.modal-body {
+    position: relative;
+    padding: 10px;
+}
+
+.modal-footer {
+    padding: 10px 20px 10px;
+    margin-top: 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+}
+
+
+/*清除浮动*/
+
+.clearfix::before,
+.clearfix::after {
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+
+/*winphone系统a、input标签被点击时产生的半透明灰色背景怎么去掉*/
+
+
+/*伪元素改变number类型input框的默认样式*/
+
+input[type=number]::-webkit-textfield-decoration-container {
+    background-color: transparent;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+button:active {
+    border-style: none;
+    border: none;
+}
+
+a:focus,
+button:focus,
+select:focus {
+    outline: none;
+    text-decoration: none;
+}
+
+select:focus option {
+    outline: none;
+    border-color: red;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+
+/*禁止ios 长按时不触发系统的菜单，禁止ios&android长按时下载图片*/
+
+.css {
+    -webkit-touch-callout: none;
+}
+
+
+/*禁止ios和android用户选中文字*/
+
+.css {
+    -webkit-user-select: none;
+}
+
+
+/*移动端字体设置*/
+
+
+/*移动端字体设置结束*/
+
+
+/*webkit表单元素的默认外观怎么重置*/
+
+.css {
+    -webkit-appearance: none;
+}
+
+
+/*webkit表单输入框placeholder的颜色值能改变么*/
+
+
+/*input::-webkit-input-placeholder {
+	color: #AAAAAA;
+}
+
+input:focus::-webkit-input-placeholder {
+	color: #EEEEEE;
+}*/
+
+
+/*自定义select样式*/
+
+.fullWidth {
+    width: 100% !important;
+}
+
+.noBorderRadius {
+    border-radius: 0 !important;
+}
+
+.noMargin {
+    margin: 0 !important;
+}
+
+.opacity_1 {
+    opacity: 1 !important;
+}
+
+.nopaddingBottom {
+    padding-bottom: 0 !important;
+}
+
+.nomarginLeft {
+    margin-left: 0!important;
+}
+
+.warning {
+    color: #ff0000;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+.showResult {
+    padding: 10px;
+    font-size: 16px;
+    color: #fcb645;
+    font-weight: 500;
+}
+
+.shuoming {
+    padding: 15px;
+    color: #9e9e9e;
+}
+
+.shuoming p {
+    corlor: #9e9e9e;
+    font-size: 14px;
+    line-height: 1.5
+}
+
+.mint-header {
+    color: #f7e1a7;
+    background-color: #321109;
+}
+
+.navFixed {
+    position: fixed;
+    z-index: 555;
+    left: 0;
+    width: 100%;
+    top: 40px;
+}
+
+.mint-button--primary {
+    color: #fff;
+    background-color: #ffa91e;
+}
+
+.mint-navbar {
+    padding-bottom: 20px;
+}
+
+.mint-switch-input:checked+.mint-switch-core {
+    border-color: #4CAF50;
+    background-color: #4CAF50;
+}
+
+.mint-popup.mint-popup-top {
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    font-size: 13px;
+    color: #fff;
+}
+
+.showResult {
+    padding: 10px;
+    font-size: 16px;
+    color: #fcb645;
+    font-weight: 500;
+    background: #eee;
+}
+
+.showResult.lay {
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.showResult>.showResultTitle {
+    padding: 10px 5px;
+    margin: 10px 0;
+    background: #fff;
+}
+
+.showResult .contentResult {
+    background: #eeeeee;
+    padding: 20px 0;
+}
+
+.noresult {
+    padding: 10px;
+    padding-left: 5px!important;
+    background: #fff;
+}
+
+.mint-cell.nobckimg .mint-cell-wrapper {
+    background-image: none!important;
+}
+
+.mint-header.is-fixed {
+    top: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    z-index: 555;
+}
+
+#groupindex .mint-cell-wrapper {
+    background-image: none!important;
+}
+
+#addmember .mint-cell-label {
+    padding-left: 22px
+}
+
+.tool {
+    position: fixed;
+    width: 150px;
+    right: 10px;
+    padding: 5px 10px 15px 10px;
+    top: 50px;
+    min-height: 20px;
+    z-index: 111;
+    background: #321109;
+    border-radius: 2px 2px 0 0;
+}
+
+.tool::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -20px;
+    right: 5px;
+    z-index: 111;
+    border-style: solid;
+    border-width: 10px 7px 10px 7px;
+    border-color: transparent transparent #321109 transparent;
+}
+
+.tool .mint-cell {
+    background: transparent;
+}
+
+.tool .mint-cell-wrapper {
+    font-size: 12px;
+}
+
+.result {
+    padding: 20px 5px;
+}
+
+.result .head {
+    background: #fff;
+    font-size: 13px;
+    padding: 10px 10px;
+    color: #9e9e9e;
+    border-bottom: 1px solid #eee;
+}
+
+.result .hasresult {}
+
+.result .noresult {
+    text-align: center;
+    font-size: 25px;
+    color: #868383;
+    font-weight: 600;
+    min-height: 100px;
+    line-height: 100px;
+}
+
+.mint-cell-value {
+    color: #bda78a;
+}
+
+input::placeholder {
+    color: #f1e5e5;
+}
+
+textarea::placeholder {
+    color: #f1e5e5;
+}
+
+#donation .mint-field-core,
+#winnerfen .mint-field-core,
+#bairendata .mint-field-core,
+#bairenfenchen .mint-field-core,
+#friend .mint-field-core,
+#giverecord .mint-field-core,
+#systemgive .mint-field-core,
+#userquery .mint-field-core,
+#winnerfen .mint-field-core {
+    color: #333!important;
+}
+
+.mint-indexsection-index {
+    margin: 0;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fafafa;
+}
+
+#signalgroup .mint-cell:last-child {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#d9d9d9), color-stop(50%, #d9d9d9), color-stop(50%, transparent));
+    background-image: linear-gradient(0deg, #b08648, #b08648 50%, transparent 50%);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.mint-cell-wrapper {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#b08648), color-stop(50%, #b08648), color-stop(50%, transparent));
+    background-image: linear-gradient(180deg, #b08648, #b08648 50%, transparent 50%)!important;
+    background-size: 120% 1px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-origin: content-box;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 16px;
+    line-height: 1;
+    min-height: inherit;
+    overflow: hidden;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.mint-cell-title {
+    color: #302112;
+}
+
+.mint-indexlist::-webkit-scrollbar {
+    display: none;
+    /*隐藏滚轮*/
+}
+
+.mongban {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 222;
+    width: 100%;
+    height: 100%;
+}
+
+.mint-msgbox-input input {
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 10px 5px;
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+}

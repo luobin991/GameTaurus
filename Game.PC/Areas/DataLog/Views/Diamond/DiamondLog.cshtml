@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "DiamondLog";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle">
+            <div class="ll-layout-tool">
+                <div class="ll-layout-tool-left">
+
+                    <div class="ll-layout-tool-item data-edit-fixedInfo">
+
+                        <div id="changeType"  checkexpession="NotNull"  style="border-radius: 4px;width:160px;">
+                            <ul style="display:none">
+                                <li data-value="10">手工充值</li>
+                                <li data-value="11">手工扣除</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="ll-layout-tool-item">
+                        <input id="sdate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,maxDate:'#F{$dp.$D(\'edate\')}'})" placeholder="开始日期" />
+                        -
+                        <input id="edate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'#F{$dp.$D(\'sdate\')}',startDate:'#F{$dp.$D(\'sdate\',{d:+1})}'})" placeholder="结束日期" />
+                    </div>
+                    <div class="ll-layout-tool-item">
+                        <a id="btn_Search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;查询</a>
+                    </div>
+                </div>
+                <div class="ll-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="ll_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ll-layout-body" id="girdtable">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@Html.AppendJsFile("/Areas/DataLog/Content/DiamondLog.js")*@
+<script src="~/Areas/DataLog/Content/DiamondLog.js"></script>

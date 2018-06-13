@@ -1,0 +1,13 @@
+@import '../BaseFrameWork/Color.scss';
+#index {
+    padding-bottom: 55px;
+}
+
+.mint-tabbar>.mint-tab-item {
+    color: #a3634b;
+}
+
+.mint-tabbar>.mint-tab-item.is-selected {
+    background: transparent;
+    color: #89a022;
+}

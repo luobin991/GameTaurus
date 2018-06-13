@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+@model List<Game.Entity.NiuBusiness.T_PayConfig>
+
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle" >
+
+            <div class="ll-layout-tool">
+                <div class="ll-layout-tool-left"></div>
+                <div class="ll-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="ll_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class=" btn-group btn-group-sm" luoluo-authorize="yes">
+                        <a id="ll_Edit" class="btn btn-default">修改</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ll-layout-body" id="girdtable"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var selectedRow;
+    var refreshGirdData;
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+
+        var page = {
+            init: function () {
+
+                page.initGird();
+
+                page.bind();
+
+                page.search();
+            },
+            bind: function () {
+                // 刷新
+                $('#ll_refresh').on('click', function () {
+                    location.reload();
+                });
+
+                //新增
+                $('#ll_Edit').on('click', function () {
+                    var keyValue = $('#girdtable').jfGridValue('id');
+                    
+                    if (luoluo.checkrow(keyValue)) {
+                       
+                        selectedRow = $('#girdtable').jfGridGet('rowdata');
+                        
+                        //var rowIndex = $('#girdtable').find('.jfgrid_selected_girdtable[datapath]').attr('datapath');
+                        //var html_input = '<input id="minMoney" value="' + selectedRow.minMoney + '"/>';
+                        //$(".jfgrid-data-cell[rownum=rownum_girdtable_" + rowIndex + "][colname=minMoney]").html(html_input);
+                        luoluo.layerForm({
+                            id: 'id',
+                            title: "编辑  " + selectedRow.payName,
+                            url: top.$.rootUrl + '/GameConfig/PayConfig/UpdateView?id=' + selectedRow.id,
+                            height: 300,
+                            width: 600,
+                            callBack: function (id) {
+                                return top[id].acceptClick(refreshGirdData);
+                            }
+                        });
+
+                    }
+                });
+            },
+            initGird: function () {
+                $('#girdtable').llAuthorizeJfGrid({
+                    url: top.$.rootUrl + '/GameConfig/PayConfig/GetPayConfigs',
+                    headData: [
+                            { label: '支付方式', name: 'payName', width: 100, align: 'center' },
+                            { label: '支付类型', name: 'payType', width: 100, align: 'center' },
+                            { label: '最小金额', name: 'minMoney', width: 100, align: 'center' },
+                            { label: '最大金额', name: 'maxMoney', width: 100, align: 'center' },
+                            {
+                                label: '状态', name: 'status', width: 100, align: 'center', formatter: function (callback) {
+                                    if (callback == 1)
+                                        return '<i class="fa fa-toggle-on"></i>';
+                                    else
+                                        return '<i class="fa fa-toggle-off"></i>';
+                                }
+                            },
+                            { label: '顺序', name: 'sort', width: 80, align: 'center' },
+                            { label: '修改时间', name: 'updateTime', width: 150, align: 'center' },
+                            { label: '初始时间', name: 'createtime', width: 150, align: 'center' },
+                    ],
+                    isPage: true,
+                    reloadSelected: false,
+                    mainId: 'id'
+                });
+            },
+            search: function (param) {
+                param = param || {};
+                $('#girdtable').jfGridSet('reload', { param: param });
+            }
+        };
+
+        refreshGirdData = function () {
+            page.search();
+        };
+
+        page.init();
+
+    
+    }
+
+
+</script>

@@ -1,0 +1,149 @@
+﻿2018-05-11 18:19:40
+错误编号:2018051118194053X9b70b3bf50
+Message:无法连接到远程服务器
+Type:System.Net.WebException
+Source:System
+StackTrace:   在 System.Net.WebClient.UploadDataInternal(Uri address, String method, Byte[] data, WebRequest& request)
+   在 System.Net.WebClient.UploadData(Uri address, String method, Byte[] data)
+   在 System.Net.WebClient.UploadData(String address, String method, Byte[] data)
+   在 Game.Common.WebCommon.APIPostBack(String url, String posts, Boolean check, String contentType) 位置 E:\Projects\网站运营后台\Game.H5\Game.Common\WebCommon.cs:行号 179
+Method:UploadDataInternal
+Class:System.Net.WebClient
+UserIP:::1
+UserName:
+CompanyID:0
+CompanyName:
+BaseException:
+System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.0.21:2200
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+2018-05-11 18:19:40
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-11 18:19:40
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-11 18:25:33
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:25:33
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:25:57
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:25:57
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:26:47
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:26:47
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:26:51
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:26:51
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:27:11
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:27:11
+Url：/GameConfig/PlatFormDomain/edit
+Message：“&=”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+
+2018-05-11 18:31:05
+错误编号:2018051118310540Xa1d8342f23
+Message:基础连接已经关闭: 连接被意外关闭。
+Type:System.Net.WebException
+Source:System
+StackTrace:   在 System.Net.WebClient.UploadDataInternal(Uri address, String method, Byte[] data, WebRequest& request)
+   在 System.Net.WebClient.UploadData(Uri address, String method, Byte[] data)
+   在 System.Net.WebClient.UploadData(String address, String method, Byte[] data)
+   在 Game.Common.WebCommon.APIPostBack(String url, String posts, Boolean check, String contentType) 位置 E:\Projects\网站运营后台\Game.H5\Game.Common\WebCommon.cs:行号 179
+Method:UploadDataInternal
+Class:System.Net.WebClient
+UserIP:::1
+UserName:
+CompanyID:0
+CompanyName:
+
+2018-05-11 18:31:05
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-11 18:31:05
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-11 18:32:20
+错误编号:2018051118322042X93351a0348
+Message:基础连接已经关闭: 连接被意外关闭。
+Type:System.Net.WebException
+Source:System
+StackTrace:   在 System.Net.WebClient.UploadDataInternal(Uri address, String method, Byte[] data, WebRequest& request)
+   在 System.Net.WebClient.UploadData(Uri address, String method, Byte[] data)
+   在 System.Net.WebClient.UploadData(String address, String method, Byte[] data)
+   在 Game.Common.WebCommon.APIPostBack(String url, String posts, Boolean check, String contentType) 位置 E:\Projects\网站运营后台\Game.H5\Game.Common\WebCommon.cs:行号 179
+Method:UploadDataInternal
+Class:System.Net.WebClient
+UserIP:::1
+UserName:
+CompanyID:0
+CompanyName:
+
+2018-05-11 18:32:20
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-11 18:32:20
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-11 18:36:44
+错误编号:2018051118364488X044a872ade
+Message:基础连接已经关闭: 连接被意外关闭。
+Type:System.Net.WebException
+Source:System
+StackTrace:   在 System.Net.WebClient.UploadDataInternal(Uri address, String method, Byte[] data, WebRequest& request)
+   在 System.Net.WebClient.UploadData(Uri address, String method, Byte[] data)
+   在 System.Net.WebClient.UploadData(String address, String method, Byte[] data)
+   在 Game.Common.WebCommon.APIPostBack(String url, String posts, Boolean check, String contentType) 位置 E:\Projects\网站运营后台\Game.H5\Game.Common\WebCommon.cs:行号 179
+Method:UploadDataInternal
+Class:System.Net.WebClient
+UserIP:::1
+UserName:
+CompanyID:0
+CompanyName:
+
+2018-05-11 18:36:44
+Url：/GameConfig/PlatFormDomain/Delete
+Message：未将对象引用设置到对象的实例。
+
+2018-05-11 18:36:45
+Url：/GameConfig/PlatFormDomain/Delete
+Message：未将对象引用设置到对象的实例。
+

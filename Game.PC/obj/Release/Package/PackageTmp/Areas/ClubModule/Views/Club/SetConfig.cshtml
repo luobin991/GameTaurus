@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "SetConfig";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle" style="padding-top:5px">
+
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">公共俱乐部每个玩家可消耗钻石的额度：</label>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" id="configType_1" placeholder="" disabled="disabled" value="@ViewBag.config_1" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" >
+                    </div>
+                    &nbsp;  <input type="button" id="but_1" class="ll_edit" targettype="10001" targetval="0" value="编辑" />
+                </div>
+            </form>
+
+            @*<form role="form" class="form-horizontal">
+        <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">公共俱乐部每次开房消耗的额度：</label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control" id="configType_2" placeholder="" disabled="disabled" value="@ViewBag.config_2" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" >
+            </div>
+            &nbsp;      <input type="button" id="but_2" class="ll_edit" targettype="10002" targetval="0" value="编辑" />
+        </div>
+    </form>*@
+
+
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">私人俱乐部最大开桌数：</label>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" id="configType_3" placeholder="" disabled="disabled" value="@ViewBag.config_3" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" >
+                    </div>
+                    &nbsp;     <input type="button" id="but_3" class="ll_edit" targettype="10003" targetval="0" value="编辑" />
+                </div>
+            </form>
+
+
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">玩家可加入私人俱乐部数量：</label>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" id="configType_4" placeholder="" disabled="disabled" value="@ViewBag.config_4" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" >
+                    </div>
+                    &nbsp;     <input type="button" id="but_4" class="ll_edit" targettype="10004" targetval="0" value="编辑" />
+                </div>
+            </form>
+
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">私人俱乐部人数上限：</label>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" id="configType_5" placeholder="" disabled="disabled" value="@ViewBag.config_5" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" >
+                    </div>
+                    &nbsp;  <input type="button" id="but_5" class="ll_edit" targettype="10005" targetval="0" value="编辑" />
+                </div>
+            </form>
+
+
+            @*<form role="form" class="form-horizontal">
+        <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">私人俱乐部每次开房消耗的额度：</label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control" id="configType_6" placeholder="" disabled="disabled" value="@ViewBag.config_6" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" >
+            </div>
+            &nbsp;  <input type="button" id="but_6" class="ll_edit" targettype="10006" targetval="0" value="编辑" />
+        </div>
+    </form>*@
+
+            <form role="form" class="form-horizontal">
+            <div class="form-group">
+                <label for="lastname" class="col-sm-2 control-label">私人俱乐部默认最小带入积分倍率：</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" id="configType_7" placeholder="" disabled="disabled" value="@ViewBag.config_7" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" >
+                </div>
+                &nbsp;  <input type="button" id="but_7" class="ll_edit" targettype="10007" targetval="0" value="编辑" />
+            </div>
+        </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        $(".ll_edit").click(function () {
+
+            if ($(this).attr("targetval") == 0) {
+                $(this).prev().children().removeAttr("disabled").focus();
+                $(this).val('保存').attr("targetval", 1);
+            } else {
+
+                var tvalue = $(this).prev().children().val();
+                if (tvalue == "" || tvalue == null || Number(tvalue) < 0) {
+                    tipshow("输入不能为空，且不小于 0！", true);
+                    return;
+                }
+
+                $(this).prev().children().attr("disabled", "disabled");
+
+                $(this).val('编辑').attr("targetval", 0);
+
+                var typeval = $(this).attr("targettype")
+
+                var data = {
+                    "val": $.trim(tvalue),
+                    "type": typeval
+                }
+
+                $.llSaveForm(top.$.rootUrl + "/ClubModule/Club/SetClubConfig", data, function (res) {
+                    // 保存成功后才回调
+                    //$(".ll-layout  textarea").attr("disabled", "disabled");
+                    //$(this).html('<i class="fa fa-pencil-square-o"></i>&nbsp;编辑').attr("targetval", 1);
+                });
+            }
+        });
+
+    });
+</script>

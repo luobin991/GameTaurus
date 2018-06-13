@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "UpdateView";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+@model   Game.Entity.NiuBusiness.T_PayConfig
+
+<div class="ll-form-wrap" id="form">
+    <input type="hidden" id="id" value="@Model.id" />
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">最小值<font face="宋体">*</font></div>
+        <input id="minMoney" type="number" class="form-control" max="999999999" isvalid="yes" checkexpession="NotNull" value="@Model.minMoney" />
+    </div>
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">最大值<font face="宋体">*</font></div>
+        <input id="maxMoney" type="number" class="form-control" oninput="if (value.length > 11) value = value.slice(0, 11)"  isvalid="yes"  checkexpession="NotNull" value="@Model.maxMoney" />
+    </div>
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">排序<font face="宋体">*</font></div>
+        <input id="sort" type="number" class="form-control" max="99" isvalid="yes" checkexpession="NotNull" value="@Model.sort" />
+    </div>
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">状态<font face="宋体">*</font></div>
+        <div id="status" class="form-control">
+            <ul style="width:150px;">
+                <li data-value="1">开</li>
+                <li data-value="0">关</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    var acceptClick;
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+        var status = '@Model.status' == "1"
+        $('#status').llselect({ maxHeight: 100, placeholder: false }).llselectSet(status);
+        //保存数据
+        acceptClick = function (callBack) {
+            var minMoney = $("#minMoney").val();
+            if (parseInt(minMoney) <= 0) {
+                luoluo.alert.error('最小值输入错误，正整数');
+                return false;
+            }
+            if (minMoney > 99999999) {
+                luoluo.alert.error('最小值输入超出范围0-99999999');
+                return false;
+            }
+
+            var maxMoney = $("#maxMoney").val();
+            if (parseInt(maxMoney) <= 0) {
+                luoluo.alert.error('最大值输入错误，正整数');
+                return false;
+            }
+            if (maxMoney > 99999999)
+            {
+                luoluo.alert.error('最大值输入超出范围0-99999999');
+                return false;
+            }
+            if (parseInt(maxMoney) <= parseInt(minMoney)) {
+                luoluo.alert.error('最大值 比 最小值 大');
+                return false;
+            }
+           
+
+
+            var sort = $("#sort").val();
+            if (parseInt(sort) <= 0) {
+                luoluo.alert.error('排序输入错误，正整数');
+                return false;
+            }
+            if (sort > 9) {
+                luoluo.alert.error('排序输入超出范围0-9');
+                return false;
+            }
+
+            var select = $('#isOpen').llselectGet();
+            if (!$('#form').llValidform()) {
+                return false;
+            }
+            var postData = $('#form').llGetFormData();
+
+            $.llSaveForm(top.$.rootUrl + '/GameConfig/PayConfig/SaveData', postData, function (res) {
+                // 保存成功后才回调
+                if (!!callBack) {
+                    callBack();
+                }
+            });
+        };
+
+    }
+</script>

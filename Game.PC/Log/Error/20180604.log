@@ -1,0 +1,16 @@
+﻿2018-06-04 11:57:08
+Url：/GameConfig/PayConfig/UpdateView?model={
+Message：Error reading JObject from JsonReader. Path '', line 1, position 1.
+
+2018-06-04 11:57:08
+Url：/GameConfig/PayConfig/UpdateView?model={
+Message：Error reading JObject from JsonReader. Path '', line 1, position 1.
+
+2018-06-04 12:30:02
+Url：/GameConfig/PayConfig/SaveData
+Message：Incorrect datetime value: '0001-01-01 00:00:00 ' for column 'updateTime' at row 1
+
+2018-06-04 12:30:02
+Url：/GameConfig/PayConfig/SaveData
+Message：Incorrect datetime value: '0001-01-01 00:00:00 ' for column 'updateTime' at row 1
+

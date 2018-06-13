@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "UpdateView";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+@model   Game.Entity.NiuBusiness.T_Marquee
+
+<div class="ll-form-wrap" id="form">
+    <input type="hidden" id="id" value="@Model.id" />
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">跑马灯<font face="宋体">*</font></div>
+        <textarea id="content" class="form-control" maxlength="20" isvalid="yes" checkexpession="NotNull">@Model.content</textarea>
+    </div>
+
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">排序<font face="宋体">*</font></div>
+        <input id="pId" type="number" class="form-control" max="9" isvalid="yes" checkexpession="NotNull" value="@Model.pId" />
+    </div>
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">状态<font face="宋体">*</font></div>
+        <div id="voild" class="form-control">
+            <ul style="width:150px;">
+                <li data-value="1">开</li>
+                <li data-value="0">关</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    var acceptClick;
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+
+        var status = '@Model.voild' == "1"
+        $('#voild').llselect({ maxHeight: 100, placeholder: false }).llselectSet(status);
+
+        //保存数据
+        acceptClick = function (callBack) {
+            
+            var content = $("#content").val();
+            if (content == "") {
+                luoluo.alert.error('内容不能为空.');
+                return false;
+            }
+
+            if (content.length> 20) {
+                luoluo.alert.error('内容控制在20个长度内');
+                return false;
+            }
+
+            var pId = $("#pId").val();
+            if (parseInt(pId) <= 0) {
+                luoluo.alert.error('排序输入错误，正整数');
+                return false;
+            }
+            if (pId > 9) {
+                luoluo.alert.error('排序输入超出范围0-9');
+                return false;
+            }
+
+            var select = $('#voild').llselectGet();
+
+            if (!$('#form').llValidform()) {
+                return false;
+            }
+            var postData = $('#form').llGetFormData();
+
+            $.llSaveForm(top.$.rootUrl + '/GameConfig/Marquee/SaveData', postData, function (res) {
+                // 保存成功后才回调
+                if (!!callBack) {
+                    callBack();
+                }
+            });
+        };
+
+    }
+</script>

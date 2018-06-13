@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "ClubGameDetail";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<link href="~/Content/bootstrap/modern1.css" rel="stylesheet" />
+
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle">
+            <div class="ll-layout-body" id="girdtable" luoluo-authorize="not" style="margin-top:-4%;height:109%;"></div>
+        </div>
+    </div>
+</div>
+<style>
+    .jfgrid-data-cell {
+        height: 100px;
+    }
+</style>
+<script>
+
+    var selectedRow;
+    var refreshGirdData;
+    var roomNum = request('roomNum');
+    var clubid = request('clubid')
+
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+        var page = {
+            init: function () {
+                page.initGird();
+                //page.bind();
+                page.search();
+            },
+            bind: function () {
+                // 查询
+                $('#btn_Search').on('click', function () {
+                    var sdate = $('#sdate').val();
+                    var edate = $('#edate').val();
+                    page.search({
+                        sdate: sdate,
+                        edate: edate,
+                    });
+                });
+
+                // 刷新
+                $('#ll_refresh').on('click', function () {
+                    location.reload();
+                });
+            },
+            initGird: function () {
+                $('#girdtable').llAuthorizeJfGrid({
+                    url: top.$.rootUrl + '/ClubModule/Club/GetClubGameDetail?clubid=' + clubid + '&roomNum=' + roomNum,
+                    headData: [
+                            { label: '第N局', name: 'round', width: 50, align: 'center' },
+                            {
+                                label: '牌局一', name: 'resultNiu1', width: 200, align: 'center', formatter: function (callback, rows) {
+                                    return callback + rows.metro1;
+                                }
+                            },
+                            {
+                                label: '牌局二', name: 'resultNiu2', width: 200, align: 'center', formatter: function (callback, rows) {
+                                    return callback + rows.metro2;
+                                }
+                            },
+                            {
+                                label: '牌局三', name: 'resultNiu3', width: 200, align: 'center', formatter: function (callback, rows) {
+                                    return callback + rows.metro3;
+                                }
+                            },
+                            {
+                                label: '牌局四', name: 'resultNiu4', width: 200, align: 'center', formatter: function (callback, rows) {
+                                    return callback + rows.metro4;
+                                }
+                            },
+                            {
+                                label: '牌局五', name: 'resultNiu5', width: 200, align: 'center', formatter: function (callback, rows) {
+                                    return callback + rows.metro5;
+                                }
+                            },
+                            {
+                                label: '牌局六', name: 'resultNiu6', width: 200, align: 'center', formatter: function (callback, rows) {
+                                    return callback + rows.metro6;
+                                }
+                            },
+                            { label: '时间', name: 'updateTime', width: 150, align: 'center' }
+                    ],
+                    isPage: true,
+                    reloadSelected: false,
+                    mainId: 'id'
+                });
+            },
+            search: function (param) {
+                param = param || {};
+                $('#girdtable').jfGridSet('reload', { param: param });
+            },
+        };
+
+        //refreshGirdData = function () {
+        //    var sdate = $('#sdate').val();
+        //    var edate = $('#edate').val();
+        //    page.search({
+        //        sdate: sdate,
+        //        edate: edate,
+        //        'clubid': clubid
+        //    });
+        //};
+        page.init();
+    }
+</script>

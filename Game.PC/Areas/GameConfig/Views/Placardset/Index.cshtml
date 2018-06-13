@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+    var centent = Model == null ? "" : Model.content;
+    if (centent == null)
+    {
+        centent = "";
+    }
+}
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle" style="padding-top:5px">
+            <div class="row" style="margin:10px 0px auto 10px">
+                <div class="col-xs-6 col-md-1"><strong>公告设置：</strong> </div>
+                <div class="col-xs-12 col-md-8">
+                    <textarea class="class=" form-control"" rows="8" maxlength="50" placeholder="这里的字数不能超过50" style="min-width:280px;max-width:480px">@centent</textarea>
+                </div>
+            </div>
+            <div class="row" style="margin:10px 0px auto 10px">
+                <div class="col-xs-6 col-md-1"></div>
+                <div class="col-xs-12 col-md-8">
+                    <a id="ll_edit" class="btn btn-default" targetval="0"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".ll-layout  textarea").attr("disabled", "disabled");
+        $("#ll_edit").click(function () {
+            if ($(this).attr("targetval") == 0) {
+                $(".ll-layout  textarea").removeAttr("disabled");
+                $(this).html('<i class="fa fa-pencil-square-o"></i>&nbsp;保存').attr("targetval", 1);
+            } else {
+                var tvalue = $(".ll-layout  textarea").val();
+                //if (tvalue == "" || tvalue == null) {
+                //    tipshow("输入公告不能为空！", true);
+                //    return;
+                //}
+                var data = {
+                    "Id": "@Model.id",
+                    "content": $.trim(tvalue)
+                }
+                
+                var bnt = $(this);
+                $.lrPostForm(top.$.rootUrl + "/GameConfig/placardset/AddPlacard", data, function (res) {
+                    // 保存成功后才回调
+                
+                });
+
+                $(".ll-layout  textarea").attr("disabled", "disabled");
+                $(bnt).html('<i class="fa fa-pencil-square-o"></i>&nbsp;编辑').attr("targetval", 0);
+            }
+        });
+
+    });
+</script>

@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+@model List<Game.Entity.NiuBusiness.T_SectionConfig>
+<style>
+    #sample_editable_1 {
+        margin-top: 55px;
+        width: 60%;
+    }
+</style>
+
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle" style="padding-top:5px">
+
+            <div class="ll-layout-tool">
+                <div class="ll-layout-tool-right">
+                    <div class="btn-group btn-group-sm">
+                        <a id="ll_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <input id="issave" value="0" type="hidden" />
+                    <div class="btn-group btn-group-sm" luoluo-authorize="yes">
+                        <a id="ll_Edit" class="btn btn-default">编辑</a>
+                        <a id="ll_save" class="btn btn-default">保存</a>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+
+                <thead>
+                    <tr>
+                        <th>区间</th>
+                        <th>区间段</th>
+                        <th>比例</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr targetid="@Model[0].secType">
+                        <td>区间段1</td>
+                        <td class="center ">流水&nbsp;&lt;&nbsp;<span class="edittext  date1">@Model[0].maxMoney</span></td>
+                        <td class="edittext">@Model[0].scale%</td>
+                    </tr>
+                    <tr targetid="@Model[1].secType">
+                        <td>区间段2</td>
+                        <td class="center ">  <span class="edittext date1">@Model[1].minMoney</span>&nbsp;&lt;=&nbsp;流水&nbsp;&lt; &nbsp;<span class="edittext date2">@Model[1].maxMoney</span></td>
+                        <td class="edittext">@Model[1].scale%</td>
+                    </tr>
+                    <tr targetid="@Model[2].secType">
+                        <td>区间段3</td>
+                        <td class="center "><span class="edittext  date2">@Model[2].minMoney</span>&nbsp;&lt;=&nbsp;流水&nbsp;&lt; &nbsp;<span class="edittext  date3">@Model[2].maxMoney</span></td>
+                        <td class="edittext">@Model[2].scale%</td>
+                    </tr>
+                    <tr targetid="@Model[3].secType">
+                        <td>区间段4</td>
+                        <td class="center "><span class="edittext  date3">@Model[3].minMoney</span>&nbsp;&lt;=&nbsp;流水&nbsp;&lt; &nbsp;<span class="edittext  date4">@Model[3].maxMoney</span></td>
+                        <td class="edittext">@Model[3].scale%</td>
+                    </tr>
+                    <tr targetid="@Model[4].secType">
+                        <td>区间段5</td>
+                        <td class="center "><span class="edittext date4">@Model[4].minMoney</span>&nbsp;&lt;=&nbsp;流水&nbsp;</td>
+                        <td class="edittext">@Model[4].scale%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    /*
+     * 日 期：2018.05.29
+     * 描 述：区间配置
+     */
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+
+        var page = {
+            init: function () {
+
+                $("#ll_save").css("display", "none");
+                page.bind();
+            },
+            bind: function () {
+                // 刷新
+                $('#ll_refresh').on('click', function () {
+                    location.reload();
+                });
+
+                //编辑
+                $("#ll_Edit").on('click', function () {
+                    if ($("#issave").val() == "0") {
+                        page.Edit();
+                    }
+                });
+
+                //保存
+                $("#ll_save").on('click', function () {
+                    if ($("#issave").val() == "1") {
+                        page.submit();
+                    }
+                });
+
+            },
+            Edit: function () {
+
+                //区间段
+                $('.table td span.edittext').each(function () {
+                    var tvalue = $(this).html();
+                    $(this).html('<input value=' + tvalue + '  min="0" oninput="if (value.length > 9) value = value.slice(0, 9)"  style="width:200px;" type="number" />');
+                });
+                //比例
+                $('.table td.edittext').each(function () {
+                    var tvalue = $.trim($(this).html());
+                    tvalue = $.trim(tvalue.replace('%', ""));
+                    tvalue = parseFloat(tvalue);
+                    $(this).html('<input value=' + tvalue + '  style="width:100px;" min="0" oninput="if (value.length > 2) value = value.slice(0, 2)" step="1"   max="100" type="number" />' + '%');
+                });
+
+                page.propertychange();
+                $("#issave").val(1);
+                $("#ll_Edit").css("display", "none");
+                $("#ll_save").css("display", "block");
+            },
+            reload: function () {
+                location.reload();
+            },
+            submit: function () {
+                var dataArr = [];
+
+                var data1 = parseInt($('.table tbody span.date1>input').val());
+                var data2 = parseInt($('.table tbody span.date2>input').val());
+                var data3 = parseInt($('.table tbody span.date3>input').val());
+                var data4 = parseInt($('.table tbody span.date4>input').val());
+                //console.log(data1, data2, data3);
+                if (data1 > 999999999 || data2 > 999999999 || data3 > 999999999 || data4 > 999999999) {
+                    luoluo.alert.warning("输入的区间请在 0 -999999999 ,请重新输入");
+                    return false;
+                }
+                if (!(data1 < data2 && data2 < data3 && data3 < data4)) {
+                    luoluo.alert.warning("输入的区间大小有问题,请重新输入");
+                    return false;
+                }
+                var i = 1;
+                //循环开始
+                $('.table tbody tr').each(function (index, item) {
+                    var targetId = parseInt($(this).attr("targetId"));  //获取到标记id
+
+                    var maxnum = parseInt($(this).find('td.center span:last input').val());
+
+                    var WaterScale = $.trim($(this).find('td.edittext input').val());
+                    WaterScale = parseFloat(WaterScale.replace("%", ""));  //反水比例
+
+                    var data = {
+                        id: i,
+                        secType: targetId,
+                        maxMoney: maxnum,
+                        scale: parseInt(WaterScale),
+                    }
+                    dataArr.push(data);
+                    i++;
+                });
+
+                var jsonObj = JSON.stringify(dataArr);
+
+                luoluo.httpAsync('POST', top.$.rootUrl + "/GameConfig/SectionConfig/UpdateSection", { jsonData: jsonObj }, function (res) {
+                    page.reload();
+                });
+                $("#issave").val(0);
+                $("#ll_save").css("display", "none");
+                $("#ll_Edit").css("display", "block");
+            },
+            propertychange: function () {
+                //input编辑的时候监听输入
+                $('span.edittext input').on('input propertychange', null, function () {
+                    var pclass = $(this).parent('span').attr('class');
+                    pclass = $.trim(pclass.replace("edittext", ""));
+                    var inputvalue = $.trim($(this).val());
+                    $('.' + pclass).find('input').val(inputvalue.replace(/\b(0+)/gi, ""));
+                });
+            },
+        }
+
+        page.init();
+    }
+
+
+</script>

@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "ClubGameList";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle">
+            <div class="ll-layout-tool">
+                <div class="ll-layout-tool-left">
+                    <div class="ll-layout-tool-item">
+                        <input id="sdate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,maxDate:'#F{$dp.$D(\'edate\')}'})" placeholder="开始日期" />
+                        -
+                        <input id="edate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'#F{$dp.$D(\'sdate\')}',startDate:'#F{$dp.$D(\'sdate\',{d:+1})}'})" placeholder="结束日期" />
+                    </div>
+                    <div class="ll-layout-tool-item">
+                        <a id="btn_Search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;查询</a>
+                    </div>
+                </div>
+                <div class="ll-layout-tool-right">
+                    <div class="btn-group btn-group-sm">
+                        <a id="ll_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class="btn-group btn-group-sm" luoluo-authorize="not">
+                        <a id="ll_player" class="btn btn-default">玩家输赢</a>
+                        <a id="ll_gamedetail" class="btn btn-default">牌局详情</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ll-layout-body" id="girdtable" luoluo-authorize="not">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var selectedRow;
+    var refreshGirdData;
+    var clubid = request('id');
+
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+        var page = {
+            init: function () {
+                page.initGird();
+                page.bind();
+                page.search();
+            },
+            bind: function () {
+                // 查询
+                $('#btn_Search').on('click', function () {
+                    var sdate = $('#sdate').val();
+                    var edate = $('#edate').val();
+                    page.search({
+                        sdate: sdate,
+                        edate: edate,
+                    });
+                });
+
+                // 刷新
+                $('#ll_refresh').on('click', function () {
+                    location.reload();
+                });
+                
+
+                //玩家输赢
+                $('#ll_player').on('click', function () {
+                    var keyValue = $('#girdtable').jfGridValue('roomNum');
+                    var clubid = $('#girdtable').jfGridValue('clubId');
+                    if (luoluo.checkrowofone(keyValue)) {
+                        luoluo.layerForm({
+                            id: 'id',
+                            title: keyValue + "的详情数据",
+                            url: top.$.rootUrl + '/ClubModule/Club/ClubGamePlayer?roomNum=' + keyValue + '&clubid=' + clubid,
+                            height: 550,
+                            width: 580,
+                            btn: null,
+                        });
+                    }
+                });
+                
+                //牌局详情
+                $('#ll_gamedetail').on('click', function () {
+                    var keyValue = $('#girdtable').jfGridValue('roomNum');
+                    var clubid = $('#girdtable').jfGridValue('clubId');
+                    if (luoluo.checkrowofone(keyValue)) {
+                        luoluo.layerForm({
+                            id: 'id',
+                            title: keyValue + "的详情数据",
+                            url: top.$.rootUrl + '/ClubModule/Club/ClubGameDetail?roomNum=' + keyValue + '&clubid=' + clubid,
+                            height: 750,
+                            width: 1500,
+                            btn: null,
+                        });
+                    }
+                });
+
+            },
+            initGird: function () {
+                $('#girdtable').llAuthorizeJfGrid({
+                    url: top.$.rootUrl + '/ClubModule/Club/GetClubGameList?clubid=' + clubid,
+                    headData: [
+                            { label: '房间ID', name: 'roomNum', width: 100, align: 'center' },
+                            { label: '局数', name: 'playedRound', width: 100, align: 'center' },
+                            { label: '最低买入积分', name: 'scoreLimit', width: 100, align: 'center' },
+                            { label: '游戏时长', name: 'gameTime', width: 100, align: 'center' },
+                            { label: '游戏模式', name: 'bankerModeString', width: 100, align: 'center' },
+                            { label: '低分', name: 'baseScore', width: 100, align: 'center' },
+                            { label: '开始时间', name: 'createTimeStr', width: 100, align: 'center' },
+                            { label: '结束时间', name: 'updateTimeStr', width: 100, align: 'center' }
+                    ],
+                    isPage: true,
+                    reloadSelected: false,
+                    mainId: 'id'
+                });
+            },
+            search: function (param) {
+                param = param || {};
+                $('#girdtable').jfGridSet('reload', { param: param });
+            },
+        };
+
+        refreshGirdData = function () {
+            var sdate = $('#sdate').val();
+            var edate = $('#edate').val();
+            page.search({
+                sdate: sdate,
+                edate: edate,
+                'clubid': clubid
+            });
+            debugger
+        };
+        page.init();
+    }
+</script>

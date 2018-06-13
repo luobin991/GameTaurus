@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "战绩";
+    //Layout = "~/Views/Shared/_Form.cshtml";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+@*@Html.AppendCssFile("/Content/bootstrap/modern1.css")*@
+<link href="~/Content/bootstrap/modern1.css" rel="stylesheet" />
+<style>
+    .jfgrid-data-cell {height:80px}
+</style>
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <input hidden="hidden" id="rootnum" value="@Model" />
+        <div id="metro"></div>
+        <div class="ll-layout-body" id="girdtable" luoluo-authorize="not">
+        </div>
+    </div>
+</div>
+
+@*@Html.AppendJsFile("/Areas/DataStatistics/Content/GameRootNumDetail.js")*@
+<script src="~/Areas/DataStatistics/Content/GameRootNumDetail.js"></script>

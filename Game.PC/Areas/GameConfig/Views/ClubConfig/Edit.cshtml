@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Form.cshtml";
+    
+}
+<div class="ll-form-wrap" id="form">
+    <input type="hidden" id="typeId" value="@Model.typeId" />
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">最底带入值<font face="宋体">*</font></div>
+        <input id="entryLimit" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" value="@Model.entryLimit"/>
+    </div>
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">底分值<font face="宋体">*</font></div>
+        <input id="min_bet" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" value="@Model.min_bet" />
+    </div>
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">倍率<font face="宋体">*</font></div>
+        <input id="rate" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" value="@Model.rate" />
+    </div>
+    <div class="col-xs-10 ll-form-item">
+        <div class="ll-form-item-title">状态<font face="宋体">*</font></div>
+        <div id="isOpen" class="form-control">
+            <ul style="width:150px;">
+                <li data-value="1">开</li>
+                <li data-value="0">关</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    var acceptClick;
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+        var isOpen = '@Model.isOpen'=="True"
+        $('#isOpen').llselect({ maxHeight: 100, placeholder: false }).llselectSet(isOpen);
+        //保存数据
+        acceptClick = function (callBack) {
+            var entryLimit = $("#entryLimit").val();
+            if (parseInt(entryLimit) <= 0){
+                luoluo.alert.error('最底带入值输入错误，正整数');
+                return false;
+            }
+
+            var minbet = $("#min_bet").val();
+            if (parseInt(minbet) <= 0) {
+                luoluo.alert.error('底分值输入错误，正整数');
+                return false;
+            }
+
+            var rate = $("#rate").val();
+            if (parseInt(rate) <= 0) {
+                luoluo.alert.error('倍率输入错误，正整数');
+                return false;
+            }
+
+            var select = $('#isOpen').llselectGet();
+            if (!$('#form').llValidform()) {
+                return false;
+            }
+            var postData = $('#form').llGetFormData();
+            
+            postData['isOpen'] = select=="1";
+            $.llSaveForm(top.$.rootUrl + '/GameConfig/ClubConfig/Edit', postData, function (res) {
+                // 保存成功后才回调
+                if (!!callBack) {
+                    callBack();
+                }
+            });
+        };
+
+    }
+</script>

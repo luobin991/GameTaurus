@@ -1,0 +1,27 @@
+﻿2018-04-26 10:00:40
+错误编号:2018042610004014X30cd2cc30e
+Message:无法连接到远程服务器
+Type:System.Net.WebException
+Source:System
+StackTrace:   在 System.Net.WebClient.UploadDataInternal(Uri address, String method, Byte[] data, WebRequest& request)
+   在 System.Net.WebClient.UploadData(Uri address, String method, Byte[] data)
+   在 System.Net.WebClient.UploadData(String address, String method, Byte[] data)
+   在 Game.Common.WebCommon.APIPostBack(String url, String posts, Boolean check, String contentType) 位置 E:\Projects\网站运营后台\Game.H5\Game.Common\WebCommon.cs:行号 179
+Method:UploadDataInternal
+Class:System.Net.WebClient
+UserIP:::1
+UserName:
+CompanyID:0
+CompanyName:
+BaseException:
+System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.0.109:2115
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+2018-04-26 10:00:40
+Url：/ClubModule/Club/SetuUserDiamondLimit
+Message：未将对象引用设置到对象的实例。
+
+2018-04-26 10:00:40
+Url：/ClubModule/Club/SetuUserDiamondLimit
+Message：未将对象引用设置到对象的实例。
+

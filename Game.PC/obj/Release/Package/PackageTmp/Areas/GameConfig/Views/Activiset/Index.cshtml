@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle">
+            <div class="ll-layout-tool">
+                <div class="ll-layout-tool-left">
+                </div>
+                <div class="ll-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="ll_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class="btn-group btn-group-sm" luoluo-authorize="yes">
+                        <a id="ll_edit" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ll-layout-body" id="girdtable">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var selectedRow;
+    var refreshGirdData;
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+        var page = {
+            init: function () {
+                page.initGird();
+                page.bind();
+                page.search();
+            },
+            bind: function () {
+                // 刷新
+                $('#ll_refresh').on('click', function () {
+                    location.reload();
+                });
+                // 编辑
+                $('#ll_edit').on('click', function () {
+                    selectedRow = $('#girdtable').jfGridGet('rowdata');
+                    var keyValue = $('#girdtable').jfGridValue('id');
+
+                    if (luoluo.checkrow(keyValue)) {
+                        luoluo.layerForm({
+                            id: 'form',
+                            title: '编辑配置',
+                            url: top.$.rootUrl + '/GameConfig/Activiset/Form',
+                            width: 500,
+                            height: 180,
+                            maxmin: true,
+                            callBack: function (id) {
+                                return top[id].acceptClick(refreshGirdData);
+                            }
+                        });
+                    }
+                });
+            },
+            initGird: function () {
+                $('#girdtable').llAuthorizeJfGrid({
+                    url: top.$.rootUrl + '/GameConfig/Activiset/GetNiuNConfigList',
+                    headData: [
+                            { label: '活动名称', name: 'typeName', width: 100, align: 'center' },
+                            { label: '钻石数量', name: 'addDiamond', width: 100, align: 'center' }
+                    ],
+                    isPage: true,
+                    reloadSelected: false,
+                    mainId: 'id'
+                });
+            },
+            search: function () {
+                $('#girdtable').jfGridSet('reload');
+            }
+        };
+
+        // 保存数据后回调刷新
+        refreshGirdData = function () {
+            location.reload();
+        }
+        page.init();
+    }
+
+
+
+</script>

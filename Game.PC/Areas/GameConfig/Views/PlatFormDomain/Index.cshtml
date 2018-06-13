@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle">
+            <div class="ll-layout-tool">
+                <div class="ll-layout-tool-left">
+                    <div class="ll-layout-tool-item">
+                        <input id="txt_Keyword" type="text" class="form-control" placeholder="搜索关键字" />
+                        <input id="sdate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,maxDate:'#F{$dp.$D(\'edate\')}'})" placeholder="开始日期" />
+                        -
+                        <input id="edate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'#F{$dp.$D(\'sdate\')}',startDate:'#F{$dp.$D(\'sdate\',{d:+1})}'})" placeholder="结束日期" />
+                    </div>
+                    <div class="ll-layout-tool-item">
+                        <a id="btn_Search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;查询</a>
+                    </div>
+                </div>
+                <div class="ll-layout-tool-right">
+                    <div class="btn-group btn-group-sm">
+                        <a id="ll_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class="btn-group btn-group-sm" luoluo-authorize="yes">
+                        <a id="ll_Edit" class="btn btn-default">新增</a>
+                        <a id="ll_delete" class="btn btn-default">删除</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ll-layout-body" id="girdtable">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@Html.AppendJsFile("/Areas/DataStatistics/Content/NewUser_Index.js")*@
+<script>
+/*
+ * 日 期：2017.11.16
+ * 描 述：平台域名展示
+ */
+var selectedRow;
+var refreshGirdData;
+var bootstrap = function ($, luoluo) {
+    "use strict";
+    var companyId = '';
+    var departmentId = '';
+
+    var page = {
+        init: function () {
+
+            page.initGird();
+
+            page.bind();
+
+            page.search();
+        },
+        bind: function () {
+            // 查询
+            $('#btn_Search').on('click', function () {
+                var sdate = $('#sdate').val();
+                var edate = $('#edate').val();
+                page.search({
+                    sdate: sdate,
+                    edate: edate,
+                    keyword: $('#txt_Keyword').val(),
+                });
+            });
+
+
+            // 刷新
+            $('#ll_refresh').on('click', function () {
+                location.reload();
+            });
+
+            //新增
+            $('#ll_Edit').on('click', function () {
+                    luoluo.layerForm({
+                        id: 'roomNum',
+                        title: "域名新增",
+                        url: top.$.rootUrl + '/GameConfig/PlatFormDomain/edit',
+                        height: 300,
+                        width: 600,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+            });
+            //删除
+            $('#ll_delete').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('id');
+                if (luoluo.checkrowofone(keyValue)) {
+                    var postData = {
+                        id: keyValue,
+                        url: $('#girdtable').jfGridValue('domainname')
+                    }
+                    $.llSaveForm(top.$.rootUrl + '/GameConfig/PlatFormDomain/Delete', postData, function (res) {
+                        refreshGirdData();
+                    });
+                }
+            });
+
+        },
+        initGird: function () {
+            $('#girdtable').llAuthorizeJfGrid({
+                url: top.$.rootUrl + '/GameConfig/PlatFormDomain/GetPageList',
+                headData: [
+                        { label: '平台ID', name: 'platformid', width: 100, align: 'center' },
+                        { label: '域名', name: 'domainname', width: 500, align: 'center' },
+                        { label: '创建时间', name: 'createtime', width: 150, align: 'center' }
+                ],
+                isPage: true,
+                reloadSelected: false,
+                mainId: 'id'
+            });
+        },
+        search: function (param) {
+            param = param || {};
+            $('#girdtable').jfGridSet('reload', { param: param });
+        }
+    };
+
+    refreshGirdData = function () {
+        var sdate = $('#sdate').val();
+        var edate = $('#edate').val();
+        page.search({
+            sdate: sdate,
+            edate: edate,
+            keyword: $('#txt_Keyword').val(),
+        });
+    };
+
+    page.init();
+}
+
+
+</script>

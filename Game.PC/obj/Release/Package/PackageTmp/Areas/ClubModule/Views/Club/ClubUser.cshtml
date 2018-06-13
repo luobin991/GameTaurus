@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "俱乐部成员设置额度";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="ll-form-wrap" id="form">
+    <input id="clubid" type="hidden" value="@ViewBag.club" />
+    <input id="userid" type="hidden" value="@ViewBag.user" />
+    <input id="type" type="hidden" value="@ViewBag.type" />
+
+    <div class="col-xs-8 ll-form-item"></div>
+    <div class="col-xs-8 ll-form-item">
+        <div class="ll-form-item-title">值<font face="宋体">*</font></div>
+        <input id="value" type="number" class="form-control" isvalid="yes" checkexpession="Num" min="0" oninput="if (value.length > 9) value = value.slice(0, 9)"/>
+    </div>
+    <div class="col-xs-8 ll-form-item"></div>
+</div>
+<script type="text/javascript">
+        var acceptClick;
+        var keyValue = '';
+
+        var bootstrap = function ($, luoluo) {
+            "use strict";
+            // 保存数据
+            acceptClick = function (callBack) {
+
+                if (!$('#form').llValidform()) {
+                    return false;
+                }
+                var postData = $('#form').llGetFormData(keyValue);
+                if (parseInt(postData["value"])<0 || parseInt(postData["value"])>999999999) {
+                    luoluo.alert.warning("输入的值请在 0 -999999999 ,请重新输入");
+                    return false;
+                }
+                
+                luoluo.postForm(top.$.rootUrl + '/ClubModule/Club/SetuUserDiamondLimit', postData, function (res) {
+                    // 保存成功后才回调
+                    if (!!callBack) {
+                        callBack();
+                    }
+                });
+
+            };
+        }
+</script>

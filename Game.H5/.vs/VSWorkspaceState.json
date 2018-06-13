@@ -1,0 +1,19 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\config",
+    "\\src",
+    "\\src\\api",
+    "\\src\\assets",
+    "\\src\\frame\\Group",
+    "\\src\\router",
+    "\\src\\store",
+    "\\src\\store\\modules",
+    "\\src\\view",
+    "\\src\\view\\Home",
+    "\\src\\view\\My",
+    "\\static"
+  ],
+  "SelectedNode": "\\src\\view\\Home\\Index.vue",
+  "PreviewInSolutionExplorer": true
+}

@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "Marquee";
+    Layout = "~/Views/Shared/_Index.cshtml";
+    List<Game.Entity.NiuBusiness.T_Notice> list = Model;
+}
+
+
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle" style="padding-top:0px;">
+
+            <div class="ll-layout-body" id="girdtable" style="height:200px;"></div>
+
+            <div class="ll-layout-wrap ll-layout-wrap-notitle" style="padding-top:20px">
+                <div class="row" style="margin:10px 0px auto 10px">
+                    <div class="col-xs-6 col-md-1"><strong>状态：</strong> </div>
+                    <div class="col-xs-12 col-md-8">
+                        <i class="fa fa-toggle-on" id="toggle" style="font-size:20pt;color:rgb(27, 185, 154);"></i>
+                    </div>
+                </div>
+
+                <input type="hidden" id="selid" value="0" />
+                <div class="row" style="margin:10px 0px auto 10px">
+                    <div class="col-xs-6 col-md-1"><strong>内容变更：</strong> </div>
+                    <div class="col-xs-12 col-md-8">
+                        <input type="text" id="content" class="form-control ll-input-wdatepicker" placeholder="选择更新的数据行"  maxlength="20"/>
+                    </div>
+                </div>
+                <div class="row" style="margin:10px 0px auto 10px">
+                    <div class="col-xs-6 col-md-1"></div>
+                    <div class="col-xs-12 col-md-8">
+                        <a id="ll_edit" class="btn btn-default" targetval="0"><i class="fa fa-pencil-square-o"></i>&nbsp;保存</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+
+        var page = {
+            init: function () {
+                page.initGird();
+            },
+            initGird: function () {
+                $('#girdtable').llAuthorizeJfGrid({
+                    headData: [
+                            { label: 'ID', name: 'ID', width: 150, align: 'center' },
+                            { label: '排序', name: 'pId', width: 150, align: 'center' },
+                            { label: '状态', name: 'status', width: 100, align: 'center' },
+                            { label: '内容', name: 'content', width: 650, align: 'center' },
+                    ],
+                    onSelectRow: function () {
+                        var tag = $('#girdtable').jfGridValue('status');
+                        if (tag == "正常") {
+                            $("#toggle").attr("calss", "fa fa-toggle-on").css("color", "rgb(27, 185, 154)").text(tag);
+                        } else {
+                            $("#toggle").attr("calss", "fa fa-toggle-off").css("color", "#aaa").text(tag);
+                        }
+                        $("#content").val($('#girdtable').jfGridValue('content'));
+
+                        $("#selid").val($('#girdtable').jfGridValue('ID'));
+                    },
+                    reloadSelected: false,
+                    mainId: 'id'
+                });
+            }
+        };
+
+        page.init();
+
+        var mydata = [
+               { ID: "@list[0].id", pId: "@list[0].pId", status: "@list[0].voildStr", content: "@list[0].content" },
+               { ID: "@list[1].id", pId: "@list[1].pId", status: "@list[1].voildStr", content: "@list[1].content" },
+               { ID: "@list[2].id", pId: "@list[2].pId", status: "@list[2].voildStr", content: "@list[2].content" },
+        ];
+        
+        $('#girdtable').jfGridSet('addRow', { row: mydata[0] });
+        $('#girdtable').jfGridSet('addRow', { row: mydata[1] });
+        $('#girdtable').jfGridSet('addRow', { row: mydata[2] });
+
+        $('#toggle').on('click', function () {
+            if ($(this).text() == "正常") {
+                $(this).attr("calss", "fa fa-toggle-off").css("color", "#aaa").text("停用");
+            } else if ($(this).text() == "停用")
+            { $(this).attr("calss", "fa fa-toggle-on").css("color", "rgb(27, 185, 154)").text("正常"); }
+        });
+
+        $('#ll_edit').on('click', function () {
+
+            var id = $("#selid").val();
+            var status = $('#toggle').text() == "正常" ? 100 : 101;
+            var data = $.trim($("#content").val());
+
+            var result = true;
+            if (id == 0 || data == "") {
+                result = false;
+                luoluo.alert.error('请选择数据行更新');
+            }
+            if (result) {
+                luoluo.layerConfirm('是否确认更改跑马灯内容！', function (res) {
+                    if (res) {
+                        luoluo.postForm(top.$.rootUrl + '/GameConfig/Placardset/updateMarquee', { id: id, status: status, content: data }, function () {
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+
+    }
+
+
+
+</script>

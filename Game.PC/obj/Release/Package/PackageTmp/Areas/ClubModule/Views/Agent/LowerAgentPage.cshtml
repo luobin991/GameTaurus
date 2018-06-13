@@ -1,0 +1,39 @@
+﻿
+@{
+    /*
+* 日 期：2018.2.06
+* 描 述：下级代理
+*/
+    ViewBag.Title = "LowerAgentPage";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle">
+            <div class="ll-layout-tool">
+                <div class="ll-layout-tool-left">
+                    <div class="ll-layout-tool-item">
+                        <input id="txt_Keyword" type="text" class="form-control" placeholder="搜索关键字" />
+                        <input id="sdate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,maxDate:'#F{$dp.$D(\'edate\')}'})" placeholder="加入开始日期" style="width:85px" />
+                        -
+                        <input id="edate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'#F{$dp.$D(\'sdate\')}',startDate:'#F{$dp.$D(\'sdate\',{d:+1})}'})" placeholder="加入截止日期" style="width:85px" />
+                    </div>
+                    <div class="ll-layout-tool-item">
+                        <a id="btn_Search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;查询</a>
+                    </div>
+                </div>
+                <div class="ll-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="ll_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ll-layout-body" id="girdtable">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@Html.AppendJsFile("/Areas/ClubModule/Content/LowerAgent.js")*@
+<script src="~/Areas/ClubModule/Content/LowerAgent.js"></script>

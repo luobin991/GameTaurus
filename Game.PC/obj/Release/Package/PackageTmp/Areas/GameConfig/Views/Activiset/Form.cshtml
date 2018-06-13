@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="ll-form-wrap" id="form">
+    <input id="id" type="hidden" />
+    <input id="type" type="hidden" />
+    <div class="col-xs-8 ll-form-item">
+        <div class="ll-form-item-title">活动名称</div>
+        <input id="typeName" type="text" readonly="readonly" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-8 ll-form-item">
+        <div class="ll-form-item-title">钻石数量</div>
+        <input id="addDiamond" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
+    </div>
+</div>
+
+<script>
+    var keyValue = '';
+    var acceptClick;
+    var bootstrap = function ($, luoluo) {
+        "use strict";
+        var selectedRow = luoluo.frameTab.currentIframe().selectedRow;
+        
+        var page = {
+            init: function () {
+                page.initData();
+            },
+            initData: function () {
+                if (!!selectedRow) {
+                    keyValue = selectedRow.id;
+                    $('#form').llSetFormData(selectedRow);
+                }
+            }
+        };
+        // 保存数据
+        acceptClick = function (callBack) {
+            if (!$('#form').llValidform()) {
+                return false;
+            }
+            var postData = $('#form').llGetFormData(keyValue);
+            $.llSaveForm(top.$.rootUrl + '/GameConfig/Activiset/SaveForm?keyValue=' + keyValue, postData, function (res) {
+                // 保存成功后才回调
+                if (!!callBack) {
+                    callBack();
+                }
+            });
+        };
+        page.init();
+    }
+
+</script>

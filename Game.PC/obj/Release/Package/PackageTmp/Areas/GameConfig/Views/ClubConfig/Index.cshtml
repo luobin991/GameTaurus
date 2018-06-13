@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle">
+            <div class="ll-layout-tool">
+                <div class="ll-layout-tool-left"></div>
+                <div class="ll-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="ll_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class=" btn-group btn-group-sm" luoluo-authorize="yes">
+                        <a id="ll_Edit" class="btn btn-default">修改</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ll-layout-body" id="girdtable">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/*
+ * 日 期：2017.11.16
+ * 描 述：平台域名展示
+ */
+var selectedRow;
+var refreshGirdData;
+var bootstrap = function ($, luoluo) {
+    "use strict";
+    var companyId = '';
+    var departmentId = '';
+
+    var page = {
+        init: function () {
+
+            page.initGird();
+
+            page.bind();
+
+            page.search();
+        },
+        bind: function () {
+            // 刷新
+            $('#ll_refresh').on('click', function () {
+                location.reload();
+            });
+
+            //新增
+            $('#ll_Edit').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('typeId');
+                if (luoluo.checkrow(keyValue)) {
+                    luoluo.layerForm({
+                        id: 'typeId',
+                        title: "编辑  " + $('#girdtable').jfGridValue('fieldName'),
+                        url: top.$.rootUrl + '/GameConfig/ClubConfig/edit?id='+keyValue,
+                        height: 300,
+                        width: 600,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
+        },
+        initGird: function () {
+            $('#girdtable').llAuthorizeJfGrid({
+                url: top.$.rootUrl + '/GameConfig/ClubConfig/GetFieldConfig',
+                headData: [
+                        { label: '类别', name: 'fieldName', width: 100, align: 'center' },
+                        { label: '最底带入值', name: 'entryLimit', width: 100, align: 'center' },
+                        { label: '底分值', name: 'min_bet', width: 100, align: 'center' },
+                        { label: '倍率', name: 'rate', width: 100, align: 'center' },
+                        { label: '状态', name: 'isOpen', width: 100, align: 'center' , formatter: function (callback) {
+                            if (callback == 1)
+                                return '<i class="fa fa-toggle-on"></i>';
+                            else
+                                return '<i class="fa fa-toggle-off"></i>';
+                        }
+                        },
+                ],
+                isPage: true,
+                reloadSelected: false,
+                mainId: 'id'
+            });
+        },
+        search: function (param) {
+            param = param || {};
+            $('#girdtable').jfGridSet('reload', { param: param });
+        }
+    };
+
+    refreshGirdData = function () {
+        page.search();
+    };
+
+    page.init();
+}
+
+
+</script>

@@ -1,0 +1,72 @@
+﻿2018-05-12 10:25:22
+错误编号:2018051210252246Xd24aa9be6b
+Message:基础连接已经关闭: 连接被意外关闭。
+Type:System.Net.WebException
+Source:System
+StackTrace:   在 System.Net.WebClient.UploadDataInternal(Uri address, String method, Byte[] data, WebRequest& request)
+   在 System.Net.WebClient.UploadData(Uri address, String method, Byte[] data)
+   在 System.Net.WebClient.UploadData(String address, String method, Byte[] data)
+   在 Game.Common.WebCommon.APIPostBack(String url, String posts, Boolean check, String contentType) 位置 E:\Projects\网站运营后台\Game.H5\Game.Common\WebCommon.cs:行号 179
+Method:UploadDataInternal
+Class:System.Net.WebClient
+UserIP:::1
+UserName:
+CompanyID:0
+CompanyName:
+
+2018-05-12 10:25:22
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-12 10:25:22
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-12 10:26:44
+错误编号:2018051210264497Xa11da724ce
+Message:基础连接已经关闭: 连接被意外关闭。
+Type:System.Net.WebException
+Source:System
+StackTrace:   在 System.Net.WebClient.UploadDataInternal(Uri address, String method, Byte[] data, WebRequest& request)
+   在 System.Net.WebClient.UploadData(Uri address, String method, Byte[] data)
+   在 System.Net.WebClient.UploadData(String address, String method, Byte[] data)
+   在 Game.Common.WebCommon.APIPostBack(String url, String posts, Boolean check, String contentType) 位置 E:\Projects\网站运营后台\Game.H5\Game.Common\WebCommon.cs:行号 179
+Method:UploadDataInternal
+Class:System.Net.WebClient
+UserIP:::1
+UserName:
+CompanyID:0
+CompanyName:
+
+2018-05-12 10:26:50
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-12 10:26:50
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-12 10:30:07
+错误编号:2018051210300749X2122104f21
+Message:基础连接已经关闭: 连接被意外关闭。
+Type:System.Net.WebException
+Source:System
+StackTrace:   在 System.Net.WebClient.UploadDataInternal(Uri address, String method, Byte[] data, WebRequest& request)
+   在 System.Net.WebClient.UploadData(Uri address, String method, Byte[] data)
+   在 System.Net.WebClient.UploadData(String address, String method, Byte[] data)
+   在 Game.Common.WebCommon.APIPostBack(String url, String posts, Boolean check, String contentType) 位置 E:\Projects\网站运营后台\Game.H5\Game.Common\WebCommon.cs:行号 179
+Method:UploadDataInternal
+Class:System.Net.WebClient
+UserIP:::1
+UserName:
+CompanyID:0
+CompanyName:
+
+2018-05-12 10:30:07
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+
+2018-05-12 10:30:07
+Url：/GameConfig/PlatFormDomain/add
+Message：未将对象引用设置到对象的实例。
+

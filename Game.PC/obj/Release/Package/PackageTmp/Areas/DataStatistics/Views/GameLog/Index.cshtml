@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "战绩";
+    //Layout = "~/Views/Shared/_Form.cshtml";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="ll-layout">
+    <div class="ll-layout-center">
+        <div class="ll-layout-wrap ll-layout-wrap-notitle">
+            <div class="ll-layout-tool">
+                <div class="ll-layout-tool-left">
+                    <input hidden="hidden" id="userid" value="@Model" />
+                    <div class="ll-layout-tool-item">
+                        <input id="sdate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,maxDate:'#F{$dp.$D(\'edate\')}'})" placeholder="开始日期" />
+                        -
+                        <input id="edate" type="text" class="form-control ll-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,minDate:'#F{$dp.$D(\'sdate\')}',startDate:'#F{$dp.$D(\'sdate\',{d:+1})}'})" placeholder="结束日期" />
+                    </div>
+                    <div class="ll-layout-tool-item">
+                        <a id="btn_Search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;查询</a>
+                    </div>
+                </div>
+                <div class="ll-layout-tool-right">
+                    <div class="btn-group btn-group-sm">
+                        <a id="ll_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class="btn-group btn-group-sm" luoluo-authorize="not">
+                        <a id="ll_details" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;详情</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ll-layout-body" id="girdtable" luoluo-authorize="not">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@Html.AppendJsFile("/Areas/DataStatistics/Content/GameLog_Index.js")*@
+<script src="~/Areas/DataStatistics/Content/GameLog_Index.js"></script>

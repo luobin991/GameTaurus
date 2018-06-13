@@ -1,0 +1,15 @@
+﻿2018-06-08 16:23:31
+错误编号:2018060816233180X52d006bfe6
+Message:未将对象引用设置到对象的实例。
+Message2:/Home/Login
+Type:System.NullReferenceException
+Source:Game.PC
+StackTrace:   在 Game.PC.Controllers.LoginController.UserLogin(String userName, String userPassWord, String checkCode, String& msg) 位置 E:\Projects\网站运营后台\GameTaurus\Game.PC\Controllers\LoginController.cs:行号 110
+   在 Game.PC.Controllers.LoginController.Login(String userName, String userPassWord, String checkCode) 位置 E:\Projects\网站运营后台\GameTaurus\Game.PC\Controllers\LoginController.cs:行号 83
+Method:UserLogin
+Class:Game.PC.Controllers.LoginController
+UserIP:192.168.0.72
+UserName:
+CompanyID:0
+CompanyName:
+
